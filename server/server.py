@@ -1,8 +1,15 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, render_template
 import util
 
-app = Flask(__name__)
+app = Flask(
+    __name__,
+    static_url_path='/static', 
+    static_folder='./templates/',)
 
+
+@app.route('/', methods=['GET'])
+def home_page():
+    return render_template('app.html')
 
 @app.route('/classify_image', methods=['GET', 'POST'])
 def classify_image():
